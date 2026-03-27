@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Qué te hace ser emprendedor? · Beatriz Rodríguez · AIDEA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --magenta: #D61E51;
+    --magenta-dark: #B5153F;
+    --magenta-darker: #C01845;
+    --magenta-light: #F5C0CE;
+    --magenta-pale: #FAEDF1;
+    --magenta-bg: rgba(214,30,81,0.11);
+    --azul: #0F1022;
+    --azul-ghost: #1e2040;
+    --blanco: #FFFFFF;
+    --gris-texto: #3a3a5c;
+    --body-dark: #B8BFD4;
+  }
+
+  html, body {
+    min-height: 100vh;
+    background: #10101a;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .carousel-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 540px;
+  }
+
+  /* ── Slide base ── */
+  .slides-container { width: 100%; position: relative; }
+
+  .slide {
+    display: none;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    animation: fadeIn 0.35s ease;
+  }
+  .slide.active { display: flex; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Círculos decorativos ── */
+  .deco { position: absolute; border-radius: 50%; pointer-events: none; }
+
+  /* ══════════════════════════════════════
+     SLIDE 1 — Portada (magenta)
+  ══════════════════════════════════════ */
+  .s1 {
+    background: var(--magenta);
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 9%;
+  }
+  .s1 .deco-ring {
+    width: 380px; height: 380px;
+    top: -80px; right: -80px;
+    border: 1.5px solid #E87595;
+  }
+  .s1 .deco-fill {
+    width: 200px; height: 200px;
+    bottom: -60px; left: -60px;
+    background: var(--magenta-darker);
+  }
+  .s1 .pill {
+    display: inline-block;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--blanco);
+    border: 1px solid rgba(255,255,255,0.55);
+    border-radius: 100px;
+    padding: 5px 16px;
+    margin-bottom: 1rem;
+    position: relative; z-index: 1;
+  }
+  .s1 .linea {
+    width: 36px; height: 3px;
+    background: var(--magenta-light);
+    margin-bottom: 1rem;
+    position: relative; z-index: 1;
+  }
+  .s1 h1 {
+    font-size: clamp(22px, 6vw, 34px);
+    font-weight: 800;
+    color: var(--blanco);
+    line-height: 1.2;
+    position: relative; z-index: 1;
+    margin-bottom: 1.5rem;
+  }
+  .s1 h1 span {
+    font-weight: 300;
+    color: var(--magenta-light);
+  }
+  .s1 .firma {
+    font-size: 11px; font-weight: 400;
+    color: #E8A0B0;
+    position: relative; z-index: 1;
+  }
+
+  /* ══════════════════════════════════════
+     SLIDES 2–5 — Generaciones
+  ══════════════════════════════════════ */
+  .sg {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 8%;
+  }
+  .sg.light { background: var(--blanco); }
+  .sg.dark  { background: var(--azul); }
+
+  .ghost {
+    position: absolute;
+    font-size: clamp(80px, 20vw, 110px);
+    font-weight: 800;
+    line-height: 1;
+    right: 5%; top: 3%;
+    opacity: 0.06;
+    pointer-events: none;
+    user-select: none;
+  }
+  .sg.light .ghost { color: var(--magenta); }
+  .sg.dark  .ghost { color: var(--blanco); }
+
+  .gen-top { position: relative; z-index: 1; }
+
+  /* Pill etiqueta generación — 14pt */
+  .gen-label {
+    display: inline-block;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 7px 18px;
+    border-radius: 100px;
+  }
+  .sg.light .gen-label { background: var(--magenta); color: var(--blanco); }
+  .sg.dark  .gen-label {
+    background: rgba(214,30,81,0.12);
+    color: var(--magenta);
+    border: 1px solid rgba(214,30,81,0.4);
+  }
+
+  .gen-title {
+    font-size: clamp(16px, 3.5vw, 21px);
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0.6rem 0 0.4rem;
+  }
+  .sg.light .gen-title { color: var(--azul); }
+  .sg.dark  .gen-title { color: var(--blanco); }
+
+  .gen-body {
+    font-size: clamp(12px, 2.8vw, 14px);
+    font-weight: 400;
+    line-height: 1.7;
+    flex: 1;
+  }
+  .sg.light .gen-body { color: var(--gris-texto); }
+  .sg.dark  .gen-body { color: var(--body-dark); }
+
+  .insight {
+    font-size: clamp(11px, 2.4vw, 13px);
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-top: 0.65rem;
+    border-left: 3px solid var(--magenta);
+  }
+  .sg.light .insight { background: var(--magenta-pale); color: var(--magenta); }
+  .sg.dark  .insight { background: rgba(214,30,81,0.09); color: #E87595; }
+
+  .firma-mini {
+    font-size: 11px; font-weight: 400;
+    margin-top: 0.5rem;
+    opacity: 0.35;
+  }
+  .sg.light .firma-mini { color: var(--azul); }
+  .sg.dark  .firma-mini { color: var(--blanco); }
+
+  /* ══════════════════════════════════════
+     SLIDE 6 — Conclusión (magenta, = portada)
+  ══════════════════════════════════════ */
+  .s6 {
+    background: var(--magenta);
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 9%;
+  }
+  .s6 .deco-ring {
+    width: 380px; height: 380px;
+    top: -80px; right: -80px;
+    border: 1.5px solid #E87595;
+  }
+  .s6 .deco-fill {
+    width: 200px; height: 200px;
+    bottom: -60px; left: -60px;
+    background: var(--magenta-darker);
+  }
+  .s6 .pill {
+    display: inline-block;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--blanco);
+    border: 1px solid rgba(255,255,255,0.55);
+    border-radius: 100px;
+    padding: 5px 16px;
+    margin-bottom: 1rem;
+    position: relative; z-index: 1;
+  }
+  .s6 .linea {
+    width: 36px; height: 3px;
+    background: var(--magenta-light);
+    margin-bottom: 1rem;
+    position: relative; z-index: 1;
+  }
+  .s6 .big {
+    font-size: clamp(36px, 9vw, 52px);
+    font-weight: 800;
+    color: var(--blanco);
+    line-height: 1.1;
+    position: relative; z-index: 1;
+    margin-bottom: 0.75rem;
+  }
+  .s6 .big span { color: var(--magenta-light); font-weight: 300; }
+  .s6 .sub {
+    font-size: clamp(11px, 2.6vw, 14px);
+    font-weight: 300;
+    color: var(--magenta-light);
+    line-height: 1.65;
+    position: relative; z-index: 1;
+    margin-bottom: 1rem;
+  }
+  .s6 .debate-box {
+    background: var(--magenta-dark);
+    border: 1px solid var(--magenta-light);
+    border-radius: 12px;
+    padding: 12px 18px;
+    position: relative; z-index: 1;
+    margin-bottom: 1rem;
+  }
+  .s6 .debate-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--magenta-light);
+    margin-bottom: 6px;
+  }
+  .s6 .debate-q {
+    font-size: clamp(12px, 2.4vw, 13px);
+    font-weight: 600;
+    color: var(--blanco);
+    line-height: 1.5;
+  }
+  .s6 .firma {
+    font-size: 11px; font-weight: 400;
+    color: #E8A0B0;
+    position: relative; z-index: 1;
+  }
+
+  /* ── Navegación ── */
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .nav button {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    background: transparent;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1;
+  }
+  .nav button:hover { background: var(--magenta); border-color: var(--magenta); }
+  .nav button:disabled { opacity: 0.2; cursor: default; }
+
+  .dots { display: flex; gap: 8px; align-items: center; }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.22);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .dot.on { background: var(--magenta); width: 24px; border-radius: 4px; }
+
+  .counter {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.08em;
+    font-family: 'Poppins', sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<div class="carousel-wrap">
+  <div class="slides-container">
+
+    <!-- ── 1. PORTADA ── -->
+    <div class="slide s1 active">
+      <div class="deco deco-ring"></div>
+      <div class="deco deco-fill"></div>
+      <div class="pill">Reflexión · Emprendimiento en España</div>
+      <div class="linea"></div>
+      <h1>¿Qué te hace<br><span>ser emprendedor?</span></h1>
+      <div class="firma">Beatriz Rodríguez · AIDEA</div>
+    </div>
+
+    <!-- ── 2. GEN Z ── -->
+    <div class="slide sg light">
+      <div class="ghost">Z</div>
+      <div class="gen-top">
+        <div class="gen-label">Gen Z · 18–28 años</div>
+        <div class="gen-title">El emprendimiento en los extremos</div>
+      </div>
+      <div class="gen-body">
+        O les montan el negocio, o lo montan por necesidad, o tienen una idea que los consume por completo.<br><br>
+        Los más escasos son los últimos. Y los más brillantes también.
+      </div>
+      <div>
+        <div class="insight">Pero les cuesta escuchar. Y en los negocios, eso sale caro.</div>
+        <div class="firma-mini">Beatriz Rodríguez · AIDEA</div>
+      </div>
+    </div>
+
+    <!-- ── 3. MILLENNIALS ── -->
+    <div class="slide sg dark">
+      <div class="ghost">M</div>
+      <div class="gen-top">
+        <div class="gen-label">Millennials · 29–42 años</div>
+        <div class="gen-title">La generación más preparada para este momento</div>
+      </div>
+      <div class="gen-body">
+        Han sobrevivido a dos crisis y una pandemia. Son estratégicos, prudentes y saben leer el mercado.<br><br>
+        Y la IA los va a multiplicar como a ninguna otra generación.
+      </div>
+      <div>
+        <div class="insight">Emprenden con cabeza. Eso marca la diferencia.</div>
+        <div class="firma-mini">Beatriz Rodríguez · AIDEA</div>
+      </div>
+    </div>
+
+    <!-- ── 4. GEN X ── -->
+    <div class="slide sg light">
+      <div class="ghost">X</div>
+      <div class="gen-top">
+        <div class="gen-label">Generación X · 43–55 años</div>
+        <div class="gen-title">Reflexión antes que impulso</div>
+      </div>
+      <div class="gen-body">
+        No se echan a la calle sin más. Conocen el mercado real, gestionan equipos y tienen red de contactos construida con años.<br><br>
+        Si tienen ese gen emprendedor, son los más completos.
+      </div>
+      <div>
+        <div class="insight">Si no lo tienen, cualquier estabilidad económica los frena. Y no pasa nada.</div>
+        <div class="firma-mini">Beatriz Rodríguez · AIDEA</div>
+      </div>
+    </div>
+
+    <!-- ── 5. BABY BOOMERS ── -->
+    <div class="slide sg dark">
+      <div class="ghost">B</div>
+      <div class="gen-top">
+        <div class="gen-label">Baby Boomers · 56–65+ años</div>
+        <div class="gen-title">Los más injustamente ignorados</div>
+      </div>
+      <div class="gen-body">
+        Saben lo que no funciona. Y ese es el conocimiento más valioso que existe.<br><br>
+        Su mayor enemigo no es la edad. Es el entorno que les dice "¿a tu edad?"
+      </div>
+      <div>
+        <div class="insight">Esa frase mata más proyectos que la falta de financiación.</div>
+        <div class="firma-mini">Beatriz Rodríguez · AIDEA</div>
+      </div>
+    </div>
+
+    <!-- ── 6. CONCLUSIÓN (= estética portada, magenta) ── -->
+    <div class="slide s6">
+      <div class="deco deco-ring"></div>
+      <div class="deco deco-fill"></div>
+      <div class="pill">Conclusión · Emprendimiento en España</div>
+      <div class="linea"></div>
+      <div class="big">Acti<span>tud.</span></div>
+      <div class="sub">
+        No el dinero. No los estudios. No los contactos.<br><br>
+        Sin actitud no hay emprendimiento con futuro.<br>
+        Con ella, la edad es solo un número.
+      </div>
+      <div class="debate-box">
+        <div class="debate-label">Cuéntame en comentarios</div>
+        <div class="debate-q">
+          ¿En qué generación te reconoces?<br>
+          ¿Qué crees que define realmente a un emprendedor?
+        </div>
+      </div>
+      <div class="firma">Beatriz Rodríguez · AIDEA</div>
+    </div>
+
+  </div>
+
+  <!-- Navegación -->
+  <div class="nav">
+    <button id="prev" onclick="cambiar(-1)" disabled>&#8249;</button>
+    <div class="dots" id="dots"></div>
+    <button id="next" onclick="cambiar(1)">&#8250;</button>
+  </div>
+  <div class="counter" id="counter">1 / 6</div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsEl = document.getElementById('dots');
+  let cur = 0;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' on' : '');
+    d.onclick = () => ir(i);
+    dotsEl.appendChild(d);
+  });
+
+  function ir(n) {
+    slides[cur].classList.remove('active');
+    dotsEl.children[cur].classList.remove('on');
+    cur = n;
+    slides[cur].classList.add('active');
+    dotsEl.children[cur].classList.add('on');
+    document.getElementById('prev').disabled = cur === 0;
+    document.getElementById('next').disabled = cur === slides.length - 1;
+    document.getElementById('counter').textContent = (cur + 1) + ' / ' + slides.length;
+  }
+
+  function cambiar(dir) {
+    if (cur + dir >= 0 && cur + dir < slides.length) ir(cur + dir);
+  }
+
+  // Swipe táctil para móvil
+  let startX = 0;
+  const container = document.querySelector('.slides-container');
+  container.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+  container.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) cambiar(diff > 0 ? 1 : -1);
+  });
+
+  // Teclas de teclado
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') cambiar(1);
+    if (e.key === 'ArrowLeft') cambiar(-1);
+  });
+</script>
+
+</body>
+</html>
